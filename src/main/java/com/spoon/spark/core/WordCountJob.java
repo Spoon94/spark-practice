@@ -10,6 +10,8 @@ import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import scala.Tuple2;
 
+import static com.spoon.spark.core.constant.CorePracticeConstant.WIKI_OF_SPARK;
+
 /**
  * Word Count
  *
@@ -19,7 +21,7 @@ import scala.Tuple2;
  */
 @Slf4j
 public class WordCountJob {
-    private static final String WIKI_OF_SPARK = "src/main/resources/data/wikiOfSpark.txt";
+
 
     public static void main(String[] args) {
         //初始化
