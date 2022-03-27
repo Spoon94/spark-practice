@@ -25,7 +25,9 @@ public class WordCountJob {
 
     public static void main(String[] args) {
         //初始化
-        SparkConf conf = new SparkConf().setAppName("Word Count").setMaster("local[*]");
+        SparkConf conf = new SparkConf().setAppName("Word Count")
+            .setMaster("local[*]")
+            ;
         JavaSparkContext ctx = new JavaSparkContext(conf);
 
         //读文件
@@ -43,6 +45,7 @@ public class WordCountJob {
 
         //统计行数
         log.info("Top5 Word Count {}", top5CntWordList);
+        //Top5 Word Count [(67,the), (63,Spark), (54,a), (51,and), (50,of)]
     }
 
 }
