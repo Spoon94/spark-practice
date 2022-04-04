@@ -11,6 +11,7 @@ import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import scala.Tuple2;
 
+import static com.spoon.spark.core.constant.CorePracticeConstant.OUTPUT_FILE;
 import static com.spoon.spark.core.constant.CorePracticeConstant.WIKI_OF_SPARK;
 
 /**
@@ -29,7 +30,7 @@ import static com.spoon.spark.core.constant.CorePracticeConstant.WIKI_OF_SPARK;
 public class AggOpJob {
     public static void main(String[] args) {
         //初始化
-        SparkConf conf = new SparkConf().setAppName("Transform Operation").setMaster("local[*]");
+        SparkConf conf = new SparkConf().setAppName("Agg Operation").setMaster("local[*]");
         JavaSparkContext ctx = new JavaSparkContext(conf);
 
         //读文件
@@ -59,13 +60,13 @@ public class AggOpJob {
             .take(5);
         log.warn("AggregateByKey Word {}", aggregateByKeyWordList);
 
-        List<Tuple2<Integer, String>> combineByKeyTop5WordList = cacheWordRdd.mapToPair(word -> Tuple2.apply(word, 1))
+        cacheWordRdd.mapToPair(word -> Tuple2.apply(word, 1))
             .combineByKey(cnt -> cnt, Integer::sum, Integer::sum)
             .mapToPair(Tuple2::swap)
             .sortByKey(false)
-            .take(5);
-        log.warn("CombineByKey Top5 Words {}", combineByKeyTop5WordList);
+            .saveAsTextFile(OUTPUT_FILE);
         //CombineByKey Top5 Words [(67,the), (63,Spark), (54,a), (51,and), (50,of)]
+        System.out.println(cacheWordRdd.toDebugString());
     }
 
 }

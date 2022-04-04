@@ -13,6 +13,7 @@ import com.google.common.collect.Sets;
  */
 public class CorePracticeConstant {
     public static final String WIKI_OF_SPARK = "src/main/resources/data/wikiOfSpark.txt";
+    public static final String OUTPUT_FILE = "src/main/resources/data/result.txt";
     public static final List<String> LIST_DATA =
         Lists.newArrayList("Spark", "is", "cool");
     public static final Set<String> SPECIAL_WORD_SET =
